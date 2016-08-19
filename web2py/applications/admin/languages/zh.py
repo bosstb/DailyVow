@@ -306,6 +306,7 @@
 'try': '尝试',
 'try something like': '尝试',
 'Try the mobile interface': 'Try the mobile interface',
+'Type some Python code in here and hit Return (Enter) to execute it.': 'Type some Python code in here and hit Return (Enter) to execute it.',
 'Unable to check for upgrades': '无法检查是否需要升级',
 'unable to create application "%s"': '无法创建应用 "%s"',
 'unable to delete file "%(filename)s"': '无法删除文件 "%(filename)s"',
