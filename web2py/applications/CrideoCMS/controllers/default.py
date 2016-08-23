@@ -9,6 +9,14 @@
 # -------------------------------------------------------------------------
 
 
+def first():
+    return dict()
+
+
+def second():
+    return dict()
+
+
 def index():
     """
     example action using the internationalization operator T and flash
@@ -18,7 +26,7 @@ def index():
     return auth.wiki()
     """
     response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict(message='Welcome to web2py!')
 
 
 def user():

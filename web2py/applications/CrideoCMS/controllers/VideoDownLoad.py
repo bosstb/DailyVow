@@ -1,16 +1,74 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
 
-from applications.CrideoCMS.modules import youtube_dl
+# -------------------------------------------------------------------------
+# This is a sample controller
+# - index is the default action of any application
+# - user is required for authentication and authorization
+# - download is for downloading files uploaded in the db (does streaming)
+# -------------------------------------------------------------------------
+import youtube_dl
+
+
+def index():
+    tip=""
+    if request.vars.VideoURL=='':
+        tip="请输入正确的URL地址"
+    elif request.vars.VideoURL:
+        download(request.vars.VideoURL)
+        tip=request.vars.VideoURL
+    return dict(message="Hello from MyApp",tip=tip)
+
+
+def first():
+    return dict()
+
+
+def second():
+    return dict()
+
+
+def user():
+    """
+    exposes:
+    http://..../[app]/default/user/login
+    http://..../[app]/default/user/logout
+    http://..../[app]/default/user/register
+    http://..../[app]/default/user/profile
+    http://..../[app]/default/user/retrieve_password
+    http://..../[app]/default/user/change_password
+    http://..../[app]/default/user/bulk_register
+    use @auth.requires_login()
+        @auth.requires_membership('group name')
+        @auth.requires_permission('read','table name',record_id)
+    to decorate functions that need access control
+    also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
+    """
+    return dict(form=auth())
+
+
+@cache.action()
+def download():
+    """
+    allows downloading of uploaded files
+    http://..../[app]/default/download/[filename]
+    """
+    return response.download(request, db)
+
+
+def call():
+    """
+    exposes services. for example:
+    http://..../[app]/default/call/jsonrpc
+    decorate with @services.jsonrpc the functions to expose
+    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
+    """
+    return service()
+
 
 ydl_opts = {}
 
 
-def index():
-    download('https://www.youtube.com/watch?v=rCRP-5om_3Y');
-    return "dafas";
-
-
 def download(url):
-
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])

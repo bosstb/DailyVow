@@ -79,6 +79,7 @@
 'Design': 'Design',
 'design': '设计',
 'Design for': '设计用于',
+'dfasfadfaf!': 'dfasfadfaf!',
 'DISK': 'DISK',
 'Disk Cache Keys': 'Disk Cache Keys',
 'Disk Cleared': 'Disk Cleared',
