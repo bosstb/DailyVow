@@ -8,16 +8,22 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 import youtube_dl
+import thread
 
 
 def index():
-    tip=""
+    n = 1
+    tip = ""
     if request.vars.VideoURL=='':
-        tip="请输入正确的URL地址"
+        tip = "请输入正确的URL地址"
     elif request.vars.VideoURL:
-        download(request.vars.VideoURL)
-        tip=request.vars.VideoURL
-    return dict(message="Hello from MyApp",tip=tip)
+        try:
+            thread.start_new_thread(download(request.vars.VideoURL), ("Thread"+n, 2,))
+            tip = request.vars.VideoURL
+            n += 1
+        except:
+            print "Error: unable to start thread"
+    return dict(message="Hello from MyApp",tip=tip,n=n)
 
 
 def first():
